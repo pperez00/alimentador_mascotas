@@ -6,11 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:text="@string/almuerzo"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/etAlmuerzo"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="@+id/etAlmuerzo"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Almuerzo" />
+
     <EditText
         android:id="@+id/etAlmuerzo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="40dp"
         android:clickable="true"
         android:ems="10"
         android:focusable="false"
@@ -19,38 +32,15 @@
         android:maxLines="1"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:text="@string/almuerzo"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/etAlmuerzo"
-        app:layout_constraintStart_toStartOf="@+id/etAlmuerzo"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Almuerzo" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="@string/cena"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/etCena"
-        app:layout_constraintStart_toStartOf="@+id/etCena"
-        app:layout_constraintTop_toBottomOf="@+id/etAlmuerzo"
-        tools:text="Cena" />
 
     <EditText
         android:id="@+id/etCena"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="40dp"
         android:clickable="true"
         android:ems="10"
         android:focusable="false"
@@ -59,14 +49,28 @@
         android:maxLines="1"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="@string/cena"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/etCena"
+        app:layout_constraintStart_toStartOf="@+id/etCena"
+        app:layout_constraintTop_toBottomOf="@+id/etAlmuerzo"
+        tools:text="Cena" />
 
     <ImageButton
         android:id="@+id/btnBluetooth"
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginBottom="60dp"
+        android:onClick="onClick"
         android:tint="#2196F3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
@@ -78,6 +82,7 @@
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginBottom="60dp"
+        android:onClick="onClick"
         android:tint="#2196F3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

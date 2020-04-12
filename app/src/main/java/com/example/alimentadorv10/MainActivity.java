@@ -1,32 +1,35 @@
 package com.example.alimentadorv10;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
-import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final int REQUEST_ENABLE_BT = 1;
     EditText almuerzo, cena;
     ImageButton conectar, enviar;
     private static final String CERO = "0";
     private static final String DOS_PUNTOS = ":";
-
+    BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     //Calendario para obtener fecha & hora
     public final Calendar c = Calendar.getInstance();
 
     //Variables para obtener la hora hora
     final int hora = c.get(Calendar.HOUR_OF_DAY);
     final int minuto = c.get(Calendar.MINUTE);
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         almuerzo.setOnClickListener(this);
         cena.setOnClickListener(this);
+
     }
 
     @Override
@@ -51,8 +55,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.etCena:
                 obtenerHora(cena);
                 break;
+            case R.id.btnBluetooth:
+                encender();
+                break;
+            case R.id.btnSend:
+                mensaje("falta");
+                break;
         }
     }
+
+    private void encender(){
+
+        if (bluetoothAdapter == null) {
+            // Device doesn't support Bluetooth
+            mensaje("No hay bluetooth");
+        }
+
+        if (!bluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
+
+    }
+
 
     private void obtenerHora(final EditText et){
         TimePickerDialog recogerHora = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
@@ -78,6 +103,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }, hora, minuto, false);
 
         recogerHora.show();
+    }
+
+    public void mensaje(String mensaje){
+        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
     }
 
 
