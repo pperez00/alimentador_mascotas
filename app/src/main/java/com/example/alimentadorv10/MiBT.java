@@ -14,22 +14,7 @@ import java.io.OutputStream;
 import java.util.Set;
 
 public class MiBT {
-    private static final int REQUEST_ENABLE_BT = 1;
-    BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-    public void encender(Context context){
-
-        if (bluetoothAdapter == null) {
-            // Device doesn't support Bluetooth
-            Util.mensaje(context, "No hay bluetooth");
-        }
-
-        if (!bluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        }
-
-    }
 
 
 
@@ -45,7 +30,7 @@ public class MiBT {
 
                 if(bondedDevices.size() > 0) {
                     Object[] devices = bondedDevices.toArray();
-                    BluetoothDevice device = (BluetoothDevice) devices[position];
+                    BluetoothDevice device = (BluetoothDevice) devices[0];
                     ParcelUuid[] uuids = device.getUuids();
                     BluetoothSocket socket = device.createRfcommSocketToServiceRecord(uuids[0].getUuid());
                     socket.connect();

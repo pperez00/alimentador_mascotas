@@ -2,6 +2,9 @@ package com.example.alimentadorv10;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -11,10 +14,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     EditText almuerzo, cena;
     ImageButton conectar, enviar;
-    private MiBT bt;
 
     private Reloj horaAlmuerzo, horaCena;
-
+    private static final int REQUEST_ENABLE_BT = 1;
+    BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
 
 
@@ -45,13 +48,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 horaCena.obtenerHora(cena);
                 break;
             case R.id.btnBluetooth:
-                bt = new MiBT();
-                bt.encender(this);
+                encender(this);
                 break;
             case R.id.btnSend:
                 Util.mensaje(this, "falta");
                 break;
         }
+    }
+
+    public void encender(Context context){
+
+        if (bluetoothAdapter == null) {
+            // Device doesn't support Bluetooth
+            Util.mensaje(context, "No hay bluetooth");
+        }
+
+        if (!bluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+        }
+
     }
 
 
