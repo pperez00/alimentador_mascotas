@@ -16,8 +16,7 @@
         app:layout_constraintEnd_toEndOf="@+id/etAlmuerzo"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="@+id/etAlmuerzo"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Almuerzo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etAlmuerzo"
