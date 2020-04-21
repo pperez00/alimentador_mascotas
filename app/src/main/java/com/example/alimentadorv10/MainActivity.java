@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -33,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         almuerzo.setOnClickListener(this);
         cena.setOnClickListener(this);
+
+        SharedPreferences preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
+        almuerzo.setText(preferences.getString("almuerzo", ""));
+        cena.setText(preferences.getString("cena", ""));
 
     }
 
@@ -70,6 +76,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Util.mensaje(context, "Cancelado");
         }
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle hora) {
+        hora.putString("almuerzo", String.valueOf(almuerzo.getText()));
+        hora.putString("cena", String.valueOf(cena.getText()));
+        super.onSaveInstanceState(hora);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle hora){
+        super.onRestoreInstanceState(hora);
+        almuerzo.setText(hora.getString("almuerzo"));
+        cena.setText(hora.getString("cena"));
+    }
+
+    @Override
+    public void onPause() {
+        SharedPreferences preferencias = getSharedPreferences("datos", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString("almuerzo", almuerzo.getText().toString());
+        editor.putString("cena", cena.getText().toString());
+        editor.commit();
+        finish();
+        super.onPause();
     }
 
 
