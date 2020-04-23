@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -99,8 +98,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString("almuerzo", almuerzo.getText().toString());
         editor.putString("cena", cena.getText().toString());
         editor.commit();
-        finish();
         super.onPause();
+    }
+
+    public void onStop(){
+        super.onStop();
+        finish();
     }
 
 
