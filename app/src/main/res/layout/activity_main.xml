@@ -6,23 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="@string/almuerzo"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/etAlmuerzo"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="@+id/etAlmuerzo"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/etCena"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:clickable="true"
         android:ems="10"
         android:focusable="false"
@@ -36,10 +24,22 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="@string/almuerzo"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/etAlmuerzo"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="@+id/etAlmuerzo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="36dp"
         android:text="@string/cena"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/etCena"
@@ -52,7 +52,7 @@
         android:id="@+id/etAlmuerzo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="52dp"
         android:clickable="true"
         android:ems="10"
         android:focusable="false"
@@ -69,11 +69,14 @@
         android:id="@+id/btnSend"
         android:layout_width="80dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="188dp"
+        android:layout_marginBottom="112dp"
+        android:backgroundTint="#2196F3"
         android:onClick="onClick"
-        android:tint="#2196F3"
+        android:scaleType="fitCenter"
+        android:tint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_send" />
 

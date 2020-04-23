@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.example.hp.bluetoothjhr.BluetoothJhr;
@@ -13,7 +14,7 @@ import com.example.hp.bluetoothjhr.BluetoothJhr;
 public class ListaDispositivosActivity extends AppCompatActivity {
 
     ListView listaDispositivos;
-    Button conectar;
+    ImageButton conectar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
