@@ -2,24 +2,22 @@ package com.example.alimentadorv10;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.example.hp.bluetoothjhr.BluetoothJhr;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText almuerzo, cena;
-    ImageButton conectar, enviar;
 
+    EditText almuerzo, cena;
+    ImageButton enviar;
     private Reloj horaAlmuerzo, horaCena;
-    private static final int REQUEST_ENABLE_BT = 1;
-    BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    BluetoothJhr bt;
 
 
 
@@ -30,8 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         almuerzo = findViewById(R.id.etAlmuerzo);
         cena = findViewById(R.id.etCena);
-        conectar = findViewById(R.id.btnBluetooth);
         enviar = findViewById(R.id.btnSend);
+        bt = new BluetoothJhr(ListaDispositivosActivity.class, this);
 
         almuerzo.setOnClickListener(this);
         cena.setOnClickListener(this);
@@ -39,6 +37,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences preferences = getSharedPreferences("datos", Context.MODE_PRIVATE);
         almuerzo.setText(preferences.getString("almuerzo", ""));
         cena.setText(preferences.getString("cena", ""));
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        bt.ConectaBluetooth();
 
     }
 
@@ -53,30 +58,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 horaCena = new Reloj(this);
                 horaCena.obtenerHora(cena);
                 break;
-            case R.id.btnBluetooth:
-                encender(this);
-                break;
             case R.id.btnSend:
-                Util.mensaje(this, "falta");
+                String mAlmuerzo = almuerzo.getText().toString();
+                String mCena = cena.getText().toString();
+                bt.Tx(mAlmuerzo);
+                bt.Tx(mCena);
                 break;
         }
     }
 
-    public void encender(Context context){
 
-        if (bluetoothAdapter == null) {
-            // Device doesn't support Bluetooth
-            Util.mensaje(context, "No hay bluetooth");
-        }
 
-        if (!bluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-        }else{
-            Util.mensaje(context, "Cancelado");
-        }
 
-    }
 
     @Override
     public void onSaveInstanceState(Bundle hora) {
@@ -99,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString("almuerzo", almuerzo.getText().toString());
         editor.putString("cena", cena.getText().toString());
         editor.commit();
-        finish();
+        bt.CierraConexion();
         super.onPause();
     }
 
