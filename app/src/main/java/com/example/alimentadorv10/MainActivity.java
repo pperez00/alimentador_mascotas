@@ -61,7 +61,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnSend:
                 String mAlmuerzo = almuerzo.getText().toString();
                 String mCena = cena.getText().toString();
+                bt.Tx("a");
                 bt.Tx(mAlmuerzo);
+                bt.Tx("b");
                 bt.Tx(mCena);
                 break;
         }
